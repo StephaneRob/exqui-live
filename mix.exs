@@ -24,8 +24,7 @@ defmodule ExquiLive.MixProject do
     [
       "assets.deploy": [
         "cmd --cd assets npm run deploy",
-        "esbuild default --minify",
-        "phx.digest"
+        "esbuild default --minify"
       ]
     ]
   end
