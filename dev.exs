@@ -48,6 +48,7 @@ end
 
 defmodule DemoWeb.Router do
   use Phoenix.Router
+  import ExquiLive.Router
 
   pipeline :browser do
     plug :fetch_session
@@ -58,6 +59,7 @@ defmodule DemoWeb.Router do
     get "/", DemoWeb.PageController, :index
     get "/hello", DemoWeb.PageController, :hello
     get "/hello/:name", DemoWeb.PageController, :hello
+    exqui_live("/exqui")
   end
 end
 
