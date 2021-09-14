@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "deploy": "NODE_ENV=production tailwindcss --postcss --minify -i css/app.css -o ../priv/static/assets/app.css"
+  },
   "dependencies": {
     "phoenix": "../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
@@ -6,6 +9,9 @@
     "uplot": "^1.6.15"
   },
   "devDependencies": {
-    "prettier": "^2.4.0"
+    "autoprefixer": "^10.3.4",
+    "postcss": "^8.3.6",
+    "prettier": "^2.4.0",
+    "tailwindcss": "^2.2.15"
   }
 }

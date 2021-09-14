@@ -21,7 +21,13 @@ defmodule ExquiLive.MixProject do
   end
 
   defp aliases do
-    ["assets.deploy": ["esbuild default --minify", "phx.digest"]]
+    [
+      "assets.deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
+    ]
   end
 
   # Run "mix help deps" to learn about dependencies.
