@@ -47,7 +47,7 @@ defmodule ExquiLive.ChartComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <h1 class="text-2xl mb-4 text-black font-bold my-5">Real time</h1>
+    <h1 class="text-xl mb-4 text-black font-bold my-5">Real time</h1>
     <div class="rounded-sm overflow-hidden shadow bg-white p-4">
       <div id="chart-<%= @id %>" phx-hook="ChartHook" class="col-12" data-title="<%= @id %>" data-name="<%= @name %>">
         <div class="data">
