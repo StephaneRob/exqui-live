@@ -32,6 +32,7 @@ defmodule ExquiLive.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:exq, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.16"},
       {:phoenix_html, "~> 3.0.3"},
       {:phoenix_live_reload, "~> 1.3", only: :dev},

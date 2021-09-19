@@ -24,11 +24,61 @@ Application.put_env(:exqui_live, DemoWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
-      ~r"lib/phoenix/live_dashboard/(live|views)/.*(ex)$",
-      ~r"lib/phoenix/live_dashboard/templates/.*(ex)$"
+      ~r"lib/exqui_live/(live|views)/.*(ex)$",
+      ~r"lib/exqui_live/templates/.*(ex)$"
     ]
   ]
 )
+
+defmodule DemoWeb.Worker.Default do
+  def perform do
+    :timer.sleep(:rand.uniform(10000))
+  end
+end
+
+defmodule DemoWeb.Worker.Email do
+  def perform do
+    :timer.sleep(:rand.uniform(10000))
+  end
+end
+
+defmodule DemoWeb.Worker.Failed do
+  def perform do
+    1 / 0
+  end
+end
+
+defmodule DemoWeb.Enqueuer do
+  use GenServer
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, %{})
+  end
+
+  @impl true
+  def init(_) do
+    schedule_work()
+    {:ok, %{}}
+  end
+
+  @impl true
+  def handle_info(:enqueue, state) do
+    {queue, worker} =
+      Enum.random([
+        {"default", DemoWeb.Worker.Default},
+        {"failed", DemoWeb.Worker.Failed},
+        {"email", DemoWeb.Worker.Email}
+      ])
+
+    Exq.enqueue_in(Exq, queue, :rand.uniform(200), worker, [])
+    schedule_work()
+    {:noreply, state}
+  end
+
+  defp schedule_work do
+    Process.send_after(self(), :enqueue, :rand.uniform(5000))
+  end
+end
 
 defmodule DemoWeb.PageController do
   import Plug.Conn
@@ -98,6 +148,7 @@ Task.start(fn ->
   children = [
     {Phoenix.PubSub, [name: Demo.PubSub, adapter: Phoenix.PubSub.PG2]},
     DemoWeb.Endpoint,
+    DemoWeb.Enqueuer
   ]
 
   {:ok, _} = Supervisor.start_link(children, strategy: :one_for_one)

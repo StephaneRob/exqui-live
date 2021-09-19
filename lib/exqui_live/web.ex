@@ -20,6 +20,7 @@ defmodule ExquiLive.Web do
       @moduledoc false
 
       use Phoenix.LiveView, layout: {ExquiLive.LayoutView, "live.html"}
+      import ExquiLive.Helper
       unquote(view_helpers())
     end
   end
@@ -30,6 +31,7 @@ defmodule ExquiLive.Web do
       @moduledoc false
 
       use Phoenix.LiveComponent
+      import ExquiLive.Helper
       unquote(view_helpers())
     end
   end
@@ -41,6 +43,7 @@ defmodule ExquiLive.Web do
 
       # Import convenience functions for LiveView rendering
       import Phoenix.LiveView.Helpers
+      import ExquiLive.Helper
 
       # Import dashboard built-in functions
       # import Phoenix.LiveDashboard.ViewHelpers

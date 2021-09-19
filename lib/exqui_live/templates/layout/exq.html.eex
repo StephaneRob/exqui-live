@@ -7,8 +7,9 @@
     <%= csrf_meta_tag() %>
     <title><%= assigns[:page_title] || "Exqui Live" %></title>
      <style><%= raw(render("app.css")) %></style>
+     <style><%= raw(render("uplot.css")) %></style>
   </head>
-  <body>
+  <body class="bg-gray-50">
     <%= @inner_content %>
   </body>
   <script><%= raw(render("app.js")) %></script>

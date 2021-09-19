@@ -1,3 +1,7 @@
-<section>
+<header class="container mx-auto">
+  <%= live_render @socket, ExquiLive.MenuLive, id: "menu" %>
+</header>
+
+<section class="container mx-auto">
   <%= @inner_content %>
 </section>

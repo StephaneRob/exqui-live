@@ -3,13 +3,27 @@ defmodule ExquiLive.HomeLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
-    <h1>Coucou</h1>
+    ~H"""
+    <div class="">
+      <%= live_component @socket, ExquiLive.StatsComponent, id: "stats", name: "Stats" %>
+    </div>
+
+    <div>
+      <%= live_component @socket, ExquiLive.ChartComponent, id: "real_time", name: "Real time" %>
+    </div>
     """
   end
 
   @impl true
   def mount(_params, _, socket) do
+    if connected?(socket), do: :timer.send_interval(2000, self(), :update)
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_info(:update, socket) do
+    send_update(ExquiLive.StatsComponent, id: "stats")
+    send_update(ExquiLive.ChartComponent, id: "real_time")
+    {:noreply, socket}
   end
 end

@@ -14,3 +14,17 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
+
+config :exq,
+  start_on_application: true,
+  max_retries: 2,
+  queues: [
+    {"email", 2},
+    {"default", 2},
+    {"failed", 1}
+  ],
+  middleware: [
+    Exq.Middleware.Stats,
+    Exq.Middleware.Job,
+    Exq.Middleware.Manager
+  ]
