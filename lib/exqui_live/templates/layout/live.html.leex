@@ -1,5 +1,5 @@
 <header class="container mx-auto">
-  <%= live_render @socket, ExquiLive.MenuLive, id: "menu" %>
+  <%= live_component @socket, ExquiLive.MenuComponent, id: "menu", current_path: @current_path %>
 </header>
 
 <section class="container mx-auto">

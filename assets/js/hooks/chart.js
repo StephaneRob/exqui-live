@@ -21,7 +21,7 @@ const buildUplotOptions = ({ name, element, now }) => {
     ],
     scales: {
       x: {
-        min: now - 600,
+        min: now - 300,
         max: now,
       },
       y: {
@@ -63,7 +63,7 @@ class Chart {
     const last = this.data[0][this.data[0].length - 1]
     this.uplotChart.setData(this.data)
     this.uplotChart.setScale('x', {
-      min: last - 600,
+      min: last - 300,
       max: last,
     })
   }

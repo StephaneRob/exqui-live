@@ -26,4 +26,10 @@ defmodule ExquiLive.HomeLive do
     send_update(ExquiLive.ChartComponent, id: "real_time")
     {:noreply, socket}
   end
+
+  @impl true
+  def handle_params(_, uri, socket) do
+    %URI{path: path} = URI.parse(uri)
+    {:noreply, assign(socket, current_path: path)}
+  end
 end

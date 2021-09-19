@@ -51,6 +51,12 @@ defmodule ExquiLive.QueuesLive do
     {:noreply, assign(socket, jobs: queues())}
   end
 
+  @impl true
+  def handle_params(_, uri, socket) do
+    %URI{path: path} = URI.parse(uri)
+    {:noreply, assign(socket, current_path: path)}
+  end
+
   defp queues do
     {:ok, queues} = Exq.Api.queue_size(Exq.Api)
     for {q, size} <- queues, do: %{id: q, size: size}

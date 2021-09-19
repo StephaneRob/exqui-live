@@ -84,4 +84,10 @@ defmodule ExquiLive.RetriesLive do
     |> map_jid_to_id()
     |> convert_results_to_times(:failed_at)
   end
+
+  @impl true
+  def handle_params(_, uri, socket) do
+    %URI{path: path} = URI.parse(uri)
+    {:noreply, assign(socket, current_path: path)}
+  end
 end

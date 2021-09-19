@@ -4,7 +4,10 @@ defmodule ExquiLive.QueueLive do
   @impl true
   def render(assigns) do
     ~L"""
-    <h1 class="text-2xl mb-4 text-black font-bold my-5">Queue: <span class="text-gray-700"><%= @queue.id %></span></h1>
+    <h2 class="text-xl mb-4 text-black font-bold my-5">
+      <pre class="bg-gray-200 p-2 rounded-sm text-gray-600 inline-block"><%= @queue.id %></pre>
+      Queue
+    </h2>
     <div class="rounded-sm overflow-hidden shadow bg-white">
       <table class="table-auto w-full">
         <thead>
@@ -50,5 +53,11 @@ defmodule ExquiLive.QueueLive do
     jobs_structs = map_jid_to_id(jobs)
     job_ids = for j <- jobs_structs, do: Map.get(j, :id)
     {%{id: id, job_ids: job_ids, partial: false}, map_jid_to_id(jobs)}
+  end
+
+  @impl true
+  def handle_params(_, uri, socket) do
+    %URI{path: path} = URI.parse(uri)
+    {:noreply, assign(socket, current_path: path)}
   end
 end

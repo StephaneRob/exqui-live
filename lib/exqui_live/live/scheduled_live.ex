@@ -75,4 +75,10 @@ defmodule ExquiLive.ScheduledLive do
     {:ok, jobs} = Exq.Api.scheduled_with_scores(Exq.Api)
     map_score_to_jobs(jobs)
   end
+
+  @impl true
+  def handle_params(_, uri, socket) do
+    %URI{path: path} = URI.parse(uri)
+    {:noreply, assign(socket, current_path: path)}
+  end
 end
