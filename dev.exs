@@ -66,7 +66,12 @@ defmodule DemoWeb.Enqueuer do
     {queue, worker} =
       Enum.random([
         {"default", DemoWeb.Worker.Default},
+        {"default", DemoWeb.Worker.Default},
+        {"default", DemoWeb.Worker.Default},
         {"failed", DemoWeb.Worker.Failed},
+        {"email", DemoWeb.Worker.Email},
+        {"email", DemoWeb.Worker.Email},
+        {"email", DemoWeb.Worker.Email},
         {"email", DemoWeb.Worker.Email}
       ])
 

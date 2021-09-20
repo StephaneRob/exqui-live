@@ -1,6 +1,8 @@
 # ExquiLive
 
-**TODO: Add description**
+<img src="https://github.com/StephaneRob/exqui-live/raw/main/guides/images/dashboard.png" alt="Exq UI">
+
+UI for exq job processing library built with phoenix live view
 
 ## Installation
 
@@ -18,4 +20,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/exqui_live](https://hexdocs.pm/exqui_live).
-
