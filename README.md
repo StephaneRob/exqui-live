@@ -2,7 +2,7 @@
 
 <img src="https://github.com/StephaneRob/exqui-live/raw/main/guides/images/dashboard.png" alt="Exq UI">
 
-UI for exq job processing library built with phoenix live view
+UI for exq job processing library built with phoenix LiveView
 
 ## Installation
 
@@ -17,6 +17,35 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/exqui_live](https://hexdocs.pm/exqui_live).
+### Configure LiveView
+
+The dashboard is built on top of LiveView. If LiveView is already installed in your app, feel free to skip this section.
+
+```elixir
+# config/config.exs
+config :my_app, MyAppWeb.Endpoint,
+  live_view: [signing_salt: "SECRET_SALT"]
+```
+
+Then add the Phoenix.LiveView.Socket declaration to your endpoint:
+
+```elixir
+socket "/live", Phoenix.LiveView.Socket
+```
+
+### Add dashboard access
+
+```elixir
+# lib/my_app_web/router.ex
+use MyAppWeb, :router
+import ExquiLive.Router
+
+...
+
+if Mix.env() == :dev do
+  scope "/" do
+    pipe_through :browser
+    exqui_live "/exqui"
+  end
+end
+```
