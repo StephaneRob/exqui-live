@@ -4,7 +4,7 @@ defmodule ExquiLive.LayoutView do
 
   js_path = Path.join(__DIR__, "../../priv/static/assets/app.js")
   css_path = Path.join(__DIR__, "../../priv/static/assets/app.css")
-  uplpot_path = Path.join(__DIR__, "../../assets/node_modules/uplot/dist/uPlot.min.css")
+  uplpot_path = Path.join(__DIR__, "../../priv/static/assets/uPlot.min.css")
 
   @external_resource js_path
   @external_resource css_path

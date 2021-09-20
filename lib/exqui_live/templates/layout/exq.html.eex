@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no"/>
     <%= csrf_meta_tag() %>
     <title><%= assigns[:page_title] || "Exqui Live" %></title>
-     <style><%= raw(render("app.css")) %></style>
-     <style><%= raw(render("uplot.css")) %></style>
+    <style><%= raw(render("app.css")) %></style>
+    <style><%= raw(render("uplot.css")) %></style>
   </head>
   <body class="bg-gray-50">
     <%= @inner_content %>
