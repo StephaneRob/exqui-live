@@ -3,10 +3,10 @@ defmodule ExquiLive.ScheduledLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
-    <div class="flex my-5 items-center">
-      <h1 class="text-2xl text-black font-bold my-5">Scheduled</h1>
-      <button phx-click="clear_all" data-confirm="Are you sure?" class="text-sm ml-auto bg-red-300 hover:bg-red-400 py-1 px-2 rounded-sm">Clear all</button>
+    ~H"""
+    <div class="flex items-center">
+      <h1 class="text-xl text-black font-bold my-5">Scheduled</h1>
+      <button phx-click="delete_all" data-confirm="Are you sure?" class="text-sm ml-auto bg-red-300 hover:bg-red-400 py-1 px-2 rounded-sm">Delete all</button>
     </div>
     <div class="rounded-sm overflow-hidden shadow bg-white">
       <table class="table-auto w-full">
@@ -35,7 +35,7 @@ defmodule ExquiLive.ScheduledLive do
               <td class="border px-4 py-2 text-sm"><%= job.scheduled_at %></td>
               <td class="border px-4 py-2 text-sm"><%= score_to_time(job.enqueued_at) %></td>
               <td class="border px-4 py-2 border-r-0 text-sm">
-                <button phx-click="delete_job" data-confirm="Are you sure?" phx-value-id="<%= job.id %>" class="ml-4 bg-red-300 hover:bg-red-400 py-1 px-2 rounded-sm">Delete</button>
+                <button phx-click="delete_job" data-confirm="Are you sure?" phx-value-id={job.id} class="ml-4 bg-red-300 hover:bg-red-400 py-1 px-2 rounded-sm">Delete</button>
               </td>
             </tr>
           <% end %>
@@ -58,7 +58,7 @@ defmodule ExquiLive.ScheduledLive do
   end
 
   @impl true
-  def handle_event("clear_all", _value, socket) do
+  def handle_event("delete_all", _value, socket) do
     Exq.Api.clear_scheduled(Exq.Api)
     send_update(ExquiLive.StatsComponent, id: "stats")
     {:noreply, assign(socket, jobs: fetch_jobs())}

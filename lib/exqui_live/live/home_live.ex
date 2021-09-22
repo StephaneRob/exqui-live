@@ -16,7 +16,9 @@ defmodule ExquiLive.HomeLive do
 
   @impl true
   def mount(_params, _, socket) do
-    if connected?(socket), do: :timer.send_interval(2000, self(), :update)
+    if connected?(socket),
+      do: :timer.send_interval(Map.get(socket.assigns, :refresh, 2) * 1000, self(), :update)
+
     {:ok, socket}
   end
 

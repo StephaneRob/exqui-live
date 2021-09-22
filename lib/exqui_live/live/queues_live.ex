@@ -4,13 +4,12 @@ defmodule ExquiLive.QueuesLive do
   @impl true
   def render(assigns) do
     ~L"""
-    <h1 class="text-2xl mb-4 text-black font-bold my-5">Queues</h1>
+    <h1 class="text-xl mb-4 text-black font-bold my-5">Queues</h1>
     <div class="rounded-sm overflow-hidden shadow bg-white">
       <table class="table-auto w-full">
         <thead>
           <tr>
             <th class="px-4 py-2 text-left text-gray-600">Name</th>
-            <th class="px-4 py-2 text-left text-gray-600">Jobs</th>
             <th class="px-4 py-2 text-left text-gray-600">Jobs</th>
           </tr>
         </thead>
