@@ -1,3 +1,43 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.button {
+  @apply text-sm ml-auto py-1 px-3 rounded-sm text-center inline-block;
+}
+
+.button-danger {
+  @apply bg-red-300 hover:bg-red-400;
+}
+
+.button-primary {
+  @apply bg-yellow-300 hover:bg-yellow-400;
+}
+
+.button-full {
+  @apply w-full;
+}
+
+.title {
+  @apply text-xl text-black font-bold my-5;
+}
+
+.block {
+  @apply rounded-sm overflow-hidden shadow bg-white;
+}
+
+th {
+  @apply px-4 py-2 text-left text-gray-600;
+}
+
+td {
+  @apply border px-4 py-2;
+}
+
+td:not(:last-child) {
+  @apply border-l-0;
+}
+
+.code {
+  @apply text-xs bg-gray-200 p-1 rounded-sm text-gray-600 inline-block;
+}

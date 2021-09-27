@@ -62,4 +62,15 @@ defmodule ExquiLive.Helper do
   def convert_results_to_times(job, score_key) do
     Map.put(job, score_key, score_to_time(Map.get(job, score_key)))
   end
+
+  def schedule_update(socket) do
+    refresh =
+      if Map.has_key?(socket.assigns, :refresh) do
+        socket.assigns.refresh
+      else
+        2
+      end
+
+    if refresh, do: Process.send_after(self(), :update, refresh * 1000)
+  end
 end

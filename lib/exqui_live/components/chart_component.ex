@@ -46,16 +46,18 @@ defmodule ExquiLive.ChartComponent do
 
   @impl true
   def render(assigns) do
-    ~L"""
-    <h1 class="text-xl mb-4 text-black font-bold my-5">Real time</h1>
-    <div class="rounded-sm overflow-hidden shadow bg-white p-4">
-      <div id="chart-<%= @id %>" phx-hook="ChartHook" class="col-12" data-title="<%= @id %>" data-name="<%= @name %>">
-        <div class="data">
-          <%= for {timestamp, success, failed} <- @data do %>
-            <span data-timestamp="<%= timestamp%>" data-success="<%= success %>" data-failed="<%= failed %>"></span>
-          <% end %>
+    ~H"""
+    <div>
+      <h1 class="text-xl mb-4 text-black font-bold my-5">Real time</h1>
+      <div class="rounded-sm overflow-hidden shadow bg-white p-4">
+        <div id={"chart-#{@id}"} phx-hook="ChartHook" class="col-12" data-title={@id} data-name={@name}>
+          <div class="data">
+            <%= for {timestamp, success, failed} <- @data do %>
+              <span data-timestamp={timestamp} data-success={success} data-failed={failed}></span>
+            <% end %>
+          </div>
+          <div class="chart-container" phx-update="ignore" id="chart"/>
         </div>
-        <div class="chart-container" phx-update="ignore"><div>
       </div>
     </div>
     """

@@ -3,7 +3,7 @@ defmodule ExquiLive.QueueLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
+    ~H"""
     <h2 class="text-xl mb-4 text-black font-bold my-5">
       <pre class="bg-gray-200 p-2 rounded-sm text-gray-600 inline-block"><%= @queue.id %></pre>
       Queue
