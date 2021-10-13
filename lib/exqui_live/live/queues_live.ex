@@ -3,26 +3,26 @@ defmodule ExquiLive.QueuesLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
-    <h1 class="text-xl mb-4 text-black font-bold my-5">Queues</h1>
-    <div class="rounded-sm overflow-hidden shadow bg-white">
+    ~H"""
+    <h1 class="title">Queues</h1>
+    <div class="block">
       <table class="table-auto w-full">
         <thead>
           <tr>
-            <th class="px-4 py-2 text-left text-gray-600">Name</th>
-            <th class="px-4 py-2 text-left text-gray-600">Jobs</th>
+            <th>Name</th>
+            <th>Jobs</th>
           </tr>
         </thead>
         <tbody>
           <%= for queue <- @queues do %>
             <tr>
-              <td class="border px-4 py-2 border-l-0">
+              <td>
                 <%= live_redirect(queue.id, to: exqui_live_path(@socket, :queue, queue.id), class: "hover:text-yellow-500" ) %>
               </td>
-              <td class="border px-4 py-2"><%= queue.size %></td>
-              <td class="border px-4 py-2 border-r-0 text-sm text-right">
-              <button phx-click="clear_queue" data-confirm="Are you sure?" phx-value-id="<%= queue.id %>" class="ml-4 bg-red-300 hover:bg-red-400 py-1 px-2 rounded-sm">Delete</button>
-            </td>
+              <td><%= queue.size %></td>
+              <td>
+                <button phx-click="clear_queue" data-confirm="Are you sure?" phx-value-id={queue.id} class="button button-danger">Delete</button>
+              </td>
             </tr>
           <% end %>
         </tbody>

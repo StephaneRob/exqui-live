@@ -3,38 +3,35 @@ defmodule ExquiLive.StatsComponent do
 
   @impl true
   def render(assigns) do
-    ~L"""
-    <h1 class="text-xl mb-4 text-black font-bold my-5">Stats</h1>
+    ~H"""
+    <div class="stats">
+      <h1 class="title">Stats</h1>
 
-    <div class="grid grid-cols-6 gap-4 mb-5 p-5 rounded shadow bg-white">
-      <div>
-        <p class="text-gray-600 uppercase mb-4 text-yellow-400 text-sm">Processed</p>
-        <h4 class="text-gray-800 text-md"><%= @processed %></p>
-      </div>
-
-      <div>
-        <p class="text-gray-600 uppercase mb-4 text-sm">Busy</p>
-        <h4 class="text-gray-800 text-md"><%= @busy %></p>
-      </div>
-
-      <div>
-        <p class="text-gray-600 uppercase mb-4 text-sm">Enqueued</p>
-        <h4 class="text-gray-800 text-md"><%= @enqueued %></p>
-      </div>
-
-      <div>
-        <p class="text-gray-600 uppercase mb-4 text-sm">Retries</p>
-        <h4 class="text-gray-800 text-md"><%= @retries %></p>
-      </div>
-
-      <div>
-        <p class="mb-4 uppercase text-gray-600">Scheduled</p>
-        <h4 class="text-gray-800 text-md"><%= @scheduled %></p>
-      </div>
-
-      <div>
-        <p class="text-gray-600 uppercase mb-4 text-red-400 text-sm">Dead</p>
-        <h4 class="text-gray-800 text-md"><%= @dead %></p>
+      <div class="grid grid-cols-6 gap-4 block p-5">
+        <div>
+          <p class="text-gray-600 uppercase mb-4 text-yellow-400 text-sm">Processed</p>
+          <p class="text-gray-800 text-md"><%= @processed %></p>
+        </div>
+        <div>
+          <p class="text-gray-600 uppercase mb-4 text-sm">Busy</p>
+          <p class="text-gray-800 text-md"><%= @busy %></p>
+        </div>
+        <div>
+          <p class="text-gray-600 uppercase mb-4 text-sm">Enqueued</p>
+          <p class="text-gray-800 text-md"><%= @enqueued %></p>
+        </div>
+        <div>
+          <p class="text-gray-600 uppercase mb-4 text-sm">Retries</p>
+          <p class="text-gray-800 text-md"><%= @retries %></p>
+        </div>
+        <div>
+          <p class="mb-4 uppercase text-gray-600">Scheduled</p>
+          <p class="text-gray-800 text-md"><%= @scheduled %></p>
+        </div>
+        <div>
+          <p class="text-gray-600 uppercase mb-4 text-red-400 text-sm">Dead</p>
+          <p class="text-gray-800 text-md"><%= @dead %></p>
+        </div>
       </div>
     </div>
     """
