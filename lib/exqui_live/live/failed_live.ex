@@ -51,7 +51,7 @@ defmodule ExquiLive.FailedLive do
 
   @impl true
   def mount(%{"jid" => jid}, _, socket) do
-    {:ok, assign(socket, jid: jid, job: failed(jid))}
+    {:ok, assign(socket, jid: jid, job: failed(jid), refresh: 2)}
   end
 
   @impl true
@@ -63,6 +63,24 @@ defmodule ExquiLive.FailedLive do
   def handle_event("delete", _value, socket) do
     Exq.Api.remove_failed(Exq.Api, socket.assigns.jid)
     {:noreply, push_redirect(socket, to: exqui_live_path(socket, :all_failed))}
+  end
+
+  @impl true
+  def handle_event("set_refresh", %{"refresh" => ""}, socket) do
+    handle_event("set_refresh", %{"refresh" => nil}, socket)
+  end
+
+  @impl true
+  def handle_event("set_refresh", %{"refresh" => refresh}, socket) do
+    current_refresh = socket.assigns[:refresh]
+    new_refresh = if is_nil(refresh), do: refresh, else: String.to_integer(refresh)
+    socket = assign(socket, refresh: new_refresh)
+
+    if is_nil(current_refresh) and not is_nil(refresh) do
+      schedule_update(socket)
+    end
+
+    {:noreply, socket}
   end
 
   defp failed(jid) do

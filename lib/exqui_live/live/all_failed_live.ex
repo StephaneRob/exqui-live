@@ -40,13 +40,31 @@ defmodule ExquiLive.AllFailedLive do
 
   @impl true
   def mount(_, _, socket) do
-    {:ok, assign(socket, jobs: failed())}
+    {:ok, assign(socket, jobs: failed(), refresh: 2)}
   end
 
   @impl true
   def handle_event("delete_all", _value, socket) do
     Exq.Api.clear_failed(Exq.Api)
     {:noreply, assign(socket, jobs: failed())}
+  end
+
+  @impl true
+  def handle_event("set_refresh", %{"refresh" => ""}, socket) do
+    handle_event("set_refresh", %{"refresh" => nil}, socket)
+  end
+
+  @impl true
+  def handle_event("set_refresh", %{"refresh" => refresh}, socket) do
+    current_refresh = socket.assigns[:refresh]
+    new_refresh = if is_nil(refresh), do: refresh, else: String.to_integer(refresh)
+    socket = assign(socket, refresh: new_refresh)
+
+    if is_nil(current_refresh) and not is_nil(refresh) do
+      schedule_update(socket)
+    end
+
+    {:noreply, socket}
   end
 
   defp failed do
